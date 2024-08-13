@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>접근키 발급받기</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h3>접근키 발급받기</h3>
+        <div class="input-group">
+            <input type="text" id="phone-input" placeholder="휴대폰번호 입력">
+            <button id="search-button" class="emoji-button" data-tooltip="조회">🔍</button>
+        </div>
+        <div id="message"></div>
+        <div id="test-number"></div>
+        <div class="output-group">
+            <label for="rx-code">RX 접근키:</label>
+            <input type="text" id="rx-code" readonly>
+            <button id="copy-rx" class="emoji-button" data-tooltip="복사할 수 있습니다">📋</button>
+        </div>
+        <div class="output-group">
+            <label for="tx-code">TX 접근키:</label>
+            <input type="text" id="tx-code" readonly>
+            <button id="copy-tx" class="emoji-button" data-tooltip="복사할 수 있습니다">📋</button>
+        </div>
+        <button id="go-button">GO</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

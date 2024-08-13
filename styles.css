@@ -1,0 +1,143 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h3 {
+    margin: 0 0 20px;
+    text-align: center;
+    color: #333;
+}
+
+.input-group, .output-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.emoji-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    position: relative;
+}
+
+.emoji-button::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.emoji-button:hover::after {
+    opacity: 1;
+}
+
+.output-group label {
+    flex: 1;
+    margin-right: 10px;
+    color: #555;
+}
+
+.output-group input {
+    flex: 2;
+}
+
+#test-number {
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    margin-bottom: 15px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#test-number.visible {
+    opacity: 1;
+}
+
+#test-number span {
+    color: red;
+}
+
+#message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#go-button {
+    display: none;
+    width: 100px;
+    height: 100px;
+    margin: 20px auto 0;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#go-button.visible {
+    display: block;
+    animation: pulse 2s infinite;
+}
+
+#go-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
