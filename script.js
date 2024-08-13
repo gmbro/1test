@@ -260,10 +260,15 @@ const database = {
     '9513931841', '1523390548', '0911534077', '0727151017', '3635418461', '6181813701', '6909335340', '9978462336', '5916945817', '0592494615',
     '4125208264', '6642334674', '1317995594', '6413317203'];
 
+    // 데이터베이스 초기화 시 모든 키를 정규화하여 저장
+const normalizedDatabase = {};
+for (const [key, value] of Object.entries(database)) {
+    normalizedDatabase[normalizePhone(key)] = value;
+}
+
     function normalizePhone(phone) {
-        const normalized = phone.replace(/[^0-9]/g, '');
-        return normalized.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-    }
+    return phone.replace(/[^0-9]/g, '');
+}
 
     function showMessage(message) {
         messageDiv.textContent = message;
@@ -273,29 +278,29 @@ const database = {
     }
 
     function searchPhone() {
-        const phone = normalizePhone(phoneInput.value);
-        testNumberDiv.classList.remove('visible');
-        goButton.classList.remove('visible');
-        
-        if (!phone.startsWith('010-')) {
-            showMessage('올바른 휴대폰번호를 입력해주세요');
-            return;
-        }
-
-        const testKey = database[phone];
-        if (testKey) {
-            const testNumber = parseInt(testKey.replace('TEST', ''), 10);
-            testNumberDiv.innerHTML = `테스트번호 : <span>TEST ${testNumber}</span>`;
-            rxCodeInput.value = rxCodes[testNumber - 1];
-            txCodeInput.value = txCodes[testNumber - 1];
-            setTimeout(() => testNumberDiv.classList.add('visible'), 10);
-        } else {
-            testNumberDiv.textContent = '';
-            rxCodeInput.value = '';
-            txCodeInput.value = '';
-            showMessage('등록되지 않은 테스터입니다.');
-        }
+    const phone = normalizePhone(phoneInput.value);
+    testNumberDiv.classList.remove('visible');
+    goButton.classList.remove('visible');
+    
+    if (!phone.startsWith('010') || phone.length !== 11) {
+        showMessage('올바른 휴대폰번호를 입력해주세요');
+        return;
     }
+
+    const testKey = normalizedDatabase[phone];
+    if (testKey) {
+        const testNumber = parseInt(testKey.replace('TEST', ''), 10);
+        testNumberDiv.innerHTML = `테스트번호 : <span>TEST ${testNumber}</span>`;
+        rxCodeInput.value = rxCodes[testNumber - 1];
+        txCodeInput.value = txCodes[testNumber - 1];
+        setTimeout(() => testNumberDiv.classList.add('visible'), 10);
+    } else {
+        testNumberDiv.textContent = '';
+        rxCodeInput.value = '';
+        txCodeInput.value = '';
+        showMessage('등록되지 않은 테스터입니다.');
+    }
+}
 
     searchButton.addEventListener('click', searchPhone);
 
