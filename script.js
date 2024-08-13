@@ -261,7 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '4125208264', '6642334674', '1317995594', '6413317203'];
 
     function normalizePhone(phone) {
-        return phone.replace(/[^0-9]/g, '');
+        const normalized = phone.replace(/[^0-9]/g, '');
+        return normalized.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
     }
 
     function showMessage(message) {
@@ -276,8 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
         testNumberDiv.classList.remove('visible');
         goButton.classList.remove('visible');
         
-        if (!phone.startsWith('010')) {
-            showMessage('휴대폰번호를 입력해주세요');
+        if (!phone.startsWith('010-')) {
+            showMessage('올바른 휴대폰번호를 입력해주세요');
             return;
         }
 
